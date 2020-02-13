@@ -1,7 +1,9 @@
 import falcon
 import subprocess
 import json
-
+from os import uname
+import time
+#import RPi.GPIO as GPIO
 class SystemInfoRessource:
 	def on_get(self, req, resp):
 		"""Handles GET Request"""
@@ -33,9 +35,26 @@ class brewMeCoffee:
 			raise falcon.HTTPBadRequest('Bro you are not allowed to use dem coffee maschine!')
 		else:
 			print("BOB, BREW SOMETHING!")
+			brewCoffee()
+
 
 		resp.status = falcon.HTTP_201
 		resp.media = 'Coffee for User is brewing!'
 app = falcon.API()
 app.add_route('/info', SystemInfoRessource())
 app.add_route('/brew', brewMeCoffee())
+
+
+def brewCoffee():
+
+    if(uname()[4][:3] == 'arm'):
+      #  GPIO.setmode(GPIO.BCM)
+      print("This is ARM")
+      #  GPIO.setup(23, GPIO.OUT)
+      #  GPIO.output(23, GPIO.HIGH)
+      #  time.sleep(0.325)
+      #  GPIO.output(23. GPIO.LOW) 
+    else:
+        print("SIMULATED GPIO 23: On")
+        time.sleep(0.325)
+        print("SIMULATED GPIO 23: Off")

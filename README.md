@@ -6,6 +6,16 @@ API for our our local coffee maschine
 ### `GET /info`
 **Gets you some system information**
 
+### `POST /brew`
+**Brews you some nice default coffee**
+
+Arguments: (json)
+```
+{
+    "key": "The secret key only availiable to the chosen ones!"
+}
+```
+
 
 ## How to use pipenv
 
