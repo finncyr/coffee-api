@@ -1,20 +1,24 @@
 import requests
 import falcon
+import subprocess
 
-class TestGetFunction:
+class SystemInfoRessource:
 	def on_get(self, req, resp):
 		"""Handles GET Request"""
 		resp.status = falcon.HTTP_200
+
+		uptime = subprocess.Popen('uptime', stdout=subprocess.PIPE)
+		uptime_out, uptime_err = uptime.communicate()
 		
 		answer = {
-			'message': (
-				"I was GETted!" 
-				),
-			'origin': 'finncyr'
+			'uptime': uptime_out, 
+			'creator': 'finncyr',
+			'code': 'https://github.com/finncyr/coffee-api'
 			}
 
 		resp.media = answer
 
+
+
 app = falcon.API()
-test = TestGetFunction()
-app.add_route('/test', test)
+app.add_route('/info', SystemInfoRessource())
