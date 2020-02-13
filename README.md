@@ -1,8 +1,9 @@
 # coffee-api
 API for our our local coffee maschine
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 ![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/finncyr/coffee-api)
+![GitHub](https://img.shields.io/github/license/finncyr/coffee-api)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
 
 ## API Calls
