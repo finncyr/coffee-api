@@ -1,7 +1,6 @@
 import falcon
 import subprocess
 import json
-import brew
 
 class SystemInfoRessource:
 	def on_get(self, req, resp):
@@ -20,10 +19,8 @@ class SystemInfoRessource:
 		resp.media = answer
 
 class brewMeCoffee:
-	@falcon.before(max_body(64 * 1024))
 	def on_post(self, req, resp):
 		try:
-			user = req.media.get('user')
 			key  = req.media.get('key')
 
 		except AttributeError:
@@ -32,13 +29,13 @@ class brewMeCoffee:
 		with open("secret.json", "r") as read_file:
 			userdata = json.load(read_file)
 
-		if not(key = userdata["secret"]):
+		if not(key == userdata["secret"]):
 			raise falcon.HTTPBadRequest('Bro you are not allowed to use dem coffee maschine!')
 		else:
-			"""START BREWING BOI"""
+			print("BOB, BREW SOMETHING!")
 
 		resp.status = falcon.HTTP_201
-		resp.media = 'Coffee for User {} is brewing!'.format(user)
-
+		resp.media = 'Coffee for User is brewing!'
 app = falcon.API()
 app.add_route('/info', SystemInfoRessource())
+app.add_route('/brew', brewMeCoffee())
