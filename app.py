@@ -4,6 +4,7 @@ import json
 from os import uname
 import time
 #import RPi.GPIO as GPIO
+
 class SystemInfoRessource:
 	def on_get(self, req, resp):
 		"""Handles GET Request"""
@@ -23,7 +24,9 @@ class SystemInfoRessource:
 class brewMeCoffee:
 	def on_post(self, req, resp):
 		try:
-			key  = req.media.get('key')
+			result = req.media
+			key  = result.get('key')
+			username = result.get('user')
 
 		except AttributeError:
 			raise falcon.HTTPBadRequest('Missing thing', 'You need to submit something xD')
@@ -31,7 +34,7 @@ class brewMeCoffee:
 		with open("secret.json", "r") as read_file:
 			userdata = json.load(read_file)
 
-		if not(key == userdata["secret"]):
+		if not(key == userdata["secret"][(userdata['users'].index(username))]) or not username in userdata['users']:
 			raise falcon.HTTPBadRequest('Bro you are not allowed to use dem coffee maschine!')
 		else:
 			print("BOB, BREW SOMETHING!")
@@ -39,7 +42,7 @@ class brewMeCoffee:
 
 
 		resp.status = falcon.HTTP_201
-		resp.media = 'Coffee for User is brewing!'
+		resp.media = 'Coffee for User {} is brewing!'.format(username)
 app = falcon.API()
 app.add_route('/info', SystemInfoRessource())
 app.add_route('/brew', brewMeCoffee())
@@ -58,3 +61,4 @@ def brewCoffee():
         print("SIMULATED GPIO 23: On")
         time.sleep(0.325)
         print("SIMULATED GPIO 23: Off")
+
