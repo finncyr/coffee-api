@@ -4,6 +4,7 @@ import json
 from os import uname
 import time
 #import RPi.GPIO as GPIO
+
 class SystemInfoRessource:
 	def on_get(self, req, resp):
 		"""Handles GET Request"""
@@ -32,8 +33,9 @@ class brewMeCoffee:
 
 		with open("secret.json", "r") as read_file:
 			userdata = json.load(read_file)
+			userlist = userdata['users']
 
-		if not(key == userdata["secret"]) or username == None:
+		if not(key == userdata["secret"]) or not username in userlist:
 			raise falcon.HTTPBadRequest('Bro you are not allowed to use dem coffee maschine!')
 		else:
 			print("BOB, BREW SOMETHING!")
