@@ -5,7 +5,15 @@ API for our our local coffee maschine
 ![GitHub](https://img.shields.io/github/license/finncyr/coffee-api)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
+## ToDo
 
+- [x] protect coffee maschine with a global password
+- [x] usernames
+- [x] User-bound custom Passwords
+- [] Statisticts (with own API-Endpoint)
+- [] make the brewCoffee() function actually do something
+- [] WebInterface (maybe)
+ 
 ## API Calls
 
 ### `GET /info`
@@ -17,7 +25,8 @@ API for our our local coffee maschine
 Arguments: (json)
 ```
 {
-    "key": "The secret key only availiable to the chosen ones!"
+    "key":  "<The secret key only availiable to the chosen ones! (username-bound password)>"
+    "user": "<Username>"
 }
 ```
 
