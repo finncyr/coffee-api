@@ -10,9 +10,9 @@ API for our our local coffee maschine
 - [x] protect coffee maschine with a global password
 - [x] usernames
 - [x] User-bound custom Passwords
-- [] Statisticts (with own API-Endpoint)
-- [] make the brewCoffee() function actually do something
-- [] WebInterface (maybe)
+- [ ] Statisticts (with own API-Endpoint)
+- [ ] make the brewCoffee() function actually do something
+- [ ] WebInterface (maybe)
  
 ## API Calls
 
