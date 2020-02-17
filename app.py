@@ -33,9 +33,8 @@ class brewMeCoffee:
 
 		with open("secret.json", "r") as read_file:
 			userdata = json.load(read_file)
-			userlist = userdata['users']
 
-		if not(key == userdata["secret"]) or not username in userlist:
+		if not(key == userdata["secret"][(userdata['users'].index(username))]) or not username in userdata['users']:
 			raise falcon.HTTPBadRequest('Bro you are not allowed to use dem coffee maschine!')
 		else:
 			print("BOB, BREW SOMETHING!")
